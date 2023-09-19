@@ -16,6 +16,11 @@
       </form>
       <hr>
       <ul class="list-group">
+        <% if(files.length===0){ %>
+          <p class="text-center text-danger">No File Present</p>
+
+        <% } %>
+
           <% files.forEach(function(file){ %>
           <li class="list-group-item border-0 d-flex justify-content-between">
               <a class="text-decoration-none" href="/open/<%= file %>">
@@ -28,16 +33,20 @@
       </ul>
 
     </div>
+    <% if(!filedata && !filename){ %>
+      <h3 class="p-5 w-100 text-center text-danger">No Files Open</h3>
+      <%} else { %>
      <div class="right w-75">
-            <p>file.txt <a class="text-decoration-none fw-bold" href="">x</a></p>
-            <form method="post" action="/here">
+            <p><%= filename %> <a class="text-decoration-none fw-bold" href="/delete/<%= filename %>">x</a></p>
+            <form method="POST" action="/save/<%= filename%>">
               <textarea rows="19" class="form-control" name="filedata" placeholder="enter text here">
-                
+                <%= filedata %>
               </textarea>
             <button class="mt-2 px-5 btn btn-success">Save</button>
 
             </form>
         </div>
+        <%}%>
 
   </div>
 </body>
